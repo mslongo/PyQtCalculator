@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import math
 from PyQt5 import QtWidgets
 from calculatorDesign import Ui_MainWindow
 
@@ -24,6 +25,7 @@ class Mywindow(QtWidgets.QMainWindow):
 		for operator in self.ui.operators.buttons():
 			operator.clicked.connect(self.op_clicked(operator.text()))
 		self.ui.button_equals.clicked.connect(self.equals_clicked)
+		self.ui.button_sin.clicked.connect(self.sin_clicked)
 
 	def op_clicked(self, op):
 		def operation():
@@ -35,6 +37,7 @@ class Mywindow(QtWidgets.QMainWindow):
 		return operation
 
 	def do_operation(self, op):
+		self.first = False
 		if op == "+":
 			self.curr = self.first_num + self.second_num
 		elif op == "-":
@@ -47,22 +50,29 @@ class Mywindow(QtWidgets.QMainWindow):
 			else:
 				self.set_line("Err")
 
+	def sin_clicked(self):
+		self.curr = math.sin(self.curr)
+		self.set_line(self.curr)
+
 	def equals_clicked(self):
 		self.do_operation(self.currentop)
 		self.first_num = self.curr
-		self.first = False
+		self.second_num = 0
+		self.first = True
 		self.set_line(self.curr)
 
 	def set_number(self, number):
 		def print_number():
 			try:
 				if self.first:
-					self.first_num = int(number)
-					self.first = False
+					check = str(number)
+					self.first_num = int(str(self.first_num) + str(check))
+					set_number = self.first_num
 				else:
-					self.second_num = int(number)
-					self.first = True
-				self.set_line(number)
+					check = str(number)
+					self.second_num = int(str(self.second_num) + str(check))
+					set_number = self.second_num
+				self.set_line(set_number)
 			except ValueError:
 				if number == 'C':
 					self.clear()
@@ -77,6 +87,7 @@ class Mywindow(QtWidgets.QMainWindow):
 	def clear(self):
 		self.first_num = 0
 		self.second_num = 0
+		self.curr = 0
 		self.set_line(0)
 		self.first = True
 		self.currentop = "+"
