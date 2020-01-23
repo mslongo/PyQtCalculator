@@ -169,7 +169,7 @@
      <rect>
       <x>10</x>
       <y>380</y>
-      <width>151</width>
+      <width>71</width>
       <height>71</height>
      </rect>
     </property>
@@ -390,6 +390,19 @@
      <string notr="true">saved</string>
     </attribute>
    </widget>
+   <widget class="QPushButton" name="button_dec">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>380</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -418,8 +431,8 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="saved"/>
   <buttongroup name="numbers"/>
   <buttongroup name="operators"/>
-  <buttongroup name="saved"/>
  </buttongroups>
 </ui>
